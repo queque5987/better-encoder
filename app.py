@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from pydantic import BaseModel
 from fastapi.responses import JSONResponse
 from fastapi.encoders import jsonable_encoder
+import numpy as np
 
 import rtvc_main
 
@@ -20,6 +21,7 @@ async def inference(userinput: EmbedInput):
     userinput = userinput.dict()
     sample_rate = userinput["sr"]
     wav = userinput["wav"]
+    wav = np.array(wav)
     embed = rtvc_main.inference(wav, sample_rate)
     embed = jsonable_encoder(embed.tolist())
     return JSONResponse(embed)
