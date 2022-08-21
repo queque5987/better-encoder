@@ -3,7 +3,6 @@ import collections
 from encoder.params_data import *
 from encoder.model import SpeakerEncoder
 from encoder.audio import preprocess_wav   # We want to expose this function from here
-from matplotlib import cm
 from encoder import audio
 from pathlib import Path
 import numpy as np
@@ -166,23 +165,3 @@ def embed_utterance(wav, using_partials=True, return_partials=False, **kwargs):
 
 def embed_speaker(wavs, **kwargs):
     raise NotImplemented()
-
-
-def plot_embedding_as_heatmap(embed, ax=None, title="", shape=None, color_range=(0, 0.30)):
-    import matplotlib.pyplot as plt
-    if ax is None:
-        ax = plt.gca()
-
-    if shape is None:
-        height = int(np.sqrt(len(embed)))
-        shape = (height, -1)
-    embed = embed.reshape(shape)
-
-    cmap = cm.get_cmap()
-    mappable = ax.imshow(embed, cmap=cmap)
-    cbar = plt.colorbar(mappable, ax=ax, fraction=0.046, pad=0.04)
-    sm = cm.ScalarMappable(cmap=cmap)
-    sm.set_clim(*color_range)
-
-    ax.set_xticks([]), ax.set_yticks([])
-    ax.set_title(title)
