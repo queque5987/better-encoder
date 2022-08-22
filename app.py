@@ -25,3 +25,13 @@ async def inference(userinput: EmbedInput):
     embed = rtvc_main.inference(wav, sample_rate)
     embed = jsonable_encoder(embed.tolist())
     return JSONResponse(embed)
+
+@app.get('/preprocess/')
+async def inference(userinput: EmbedInput):
+    userinput = userinput.dict()
+    sample_rate = userinput["sr"]
+    wav = userinput["wav"]
+    wav = np.array(wav)
+    wav = rtvc_main.preprocess(wav, sample_rate)
+    wav = jsonable_encoder(wav.tolist())
+    return JSONResponse(wav)
