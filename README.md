@@ -48,7 +48,8 @@ https://dashboard.heroku.com/
     uvicorn
     favicon
     gunicorn
-### For Voice clonning-f https://download.pytorch.org/whl/torch_stable.html
+### For Voice clonning   
+    -f https://download.pytorch.org/whl/torch_stable.html
     torch==1.12.1+cpu
     fastapi
     pydantic
