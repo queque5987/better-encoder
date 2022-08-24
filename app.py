@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
-from fastapi.responses import JSONResponse
+from fastapi.responses import JSONResponse, HTMLResponse
 from fastapi.encoders import jsonable_encoder
 import numpy as np
 
@@ -14,10 +14,20 @@ class EmbedInput(BaseModel):
 
 @app.get('/')
 def index():
-    return {"Message": "This is Index"}
+    return HTMLResponse("main.html")
 
 @app.get('/inference/')
 async def inference(userinput: EmbedInput):
+    """
+    @request
+        user voice sample {list}
+            {array} wav, {int} sample_rate loaded by librosa
+    @response
+        user voice embedding {list}
+            {ndarray} embedding converted into {list} so that it could be sent as a request;
+
+    **This method returns user utterance embedding inferenced by Speaker Encoder**
+    """
     userinput = userinput.dict()
     sample_rate = userinput["sr"]
     wav = userinput["wav"]
@@ -28,6 +38,16 @@ async def inference(userinput: EmbedInput):
 
 @app.get('/preprocess/')
 async def inference(userinput: EmbedInput):
+    """
+    @request
+        user voice sample {list}
+            {array} wav, {int} sample_rate loaded by librosa
+    @response
+        user voice embedding {list}
+            {ndarray} embedding converted into {list} so that it could be sent as a request;
+
+    **This method preprocesses wav file - nomalizing, match the sampling rate**
+    """
     userinput = userinput.dict()
     sample_rate = userinput["sr"]
     wav = userinput["wav"]
