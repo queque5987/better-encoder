@@ -1,11 +1,9 @@
 from fastapi import FastAPI, Response
 from pydantic import BaseModel
-from fastapi.responses import JSONResponse
+from fastapi.responses import JSONResponse, FileResponse
 from fastapi.encoders import jsonable_encoder
 import numpy as np
-from fastapi.templating import Jinja2Templates
 
-templates = Jinja2Templates("/")
 
 import rtvc_main
 
@@ -20,7 +18,8 @@ def index():
     """
     greetings
     """
-    return templates.TemplateResponse("index.html")
+    return FileResponse('index.html')
+    # return templates.TemplateResponse("index.html")
 
 @app.get('/inference/')
 async def inference(userinput: EmbedInput):
