@@ -1,6 +1,6 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Response
 from pydantic import BaseModel
-from fastapi.responses import JSONResponse, HTMLResponse
+from fastapi.responses import JSONResponse
 from fastapi.encoders import jsonable_encoder
 import numpy as np
 
@@ -14,7 +14,12 @@ class EmbedInput(BaseModel):
 
 @app.get('/')
 def index():
-    return HTMLResponse("main.html")
+    """
+    greetings
+    """
+    with open('index.html') as f:
+        index = f.read()
+    return Response(content = index, media_type = "txt/html")
 
 @app.get('/inference/')
 async def inference(userinput: EmbedInput):
