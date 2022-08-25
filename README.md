@@ -14,9 +14,9 @@ https://github.com/queque5987/better-vocoder
 *Vocoder uses waveRNN Model*   
     
 ## Available on
-https://better-vocoder.herokuapp.com/
+https://better-encoder.herokuapp.com/
 ## to Inference, send request on
-https://better-vocoder.herokuapp.com/inference/
+https://better-encoder.herokuapp.com/inference/
 ### Request {JSON}
     wav @type {list}
     sr @type {int}
