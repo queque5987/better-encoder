@@ -80,10 +80,10 @@ https://github.com/queque5987/better-vocoder
 *보코더는 waveRNN 모델을 사용합니다.*   
     
 ## 서버 API 링크   
-https://better-vocoder.herokuapp.com/
+https://better-encoder.herokuapp.com/
 
 ## 엔드포인트 링크   
-https://better-vocoder.herokuapp.com/inference/
+https://better-encoder.herokuapp.com/inference/
 
 ### Request {JSON}
     wav @type {list}
