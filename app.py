@@ -1,13 +1,29 @@
+"""
+    ***************************************************
+    author: Park Young-woong
+    e-mail: pyw5987@gmail.com
+    github: https://github.com/queque5987/better-encoder
+    ***************************************************
+"""
 from fastapi import FastAPI, Response
 from pydantic import BaseModel
 from fastapi.responses import JSONResponse, FileResponse
 from fastapi.encoders import jsonable_encoder
+from fastapi.middleware.cors import CORSMiddleware
 import numpy as np
-
+import json
 
 import rtvc_main
 
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 class EmbedInput(BaseModel):
     wav: list
@@ -15,13 +31,10 @@ class EmbedInput(BaseModel):
 
 @app.get('/')
 def index():
-    """
-    greetings
-    """
     return FileResponse('index.html')
     # return templates.TemplateResponse("index.html")
 
-@app.get('/inference/')
+@app.post('/inference/')
 async def inference(userinput: EmbedInput):
     """
     @request
@@ -38,8 +51,12 @@ async def inference(userinput: EmbedInput):
     wav = userinput["wav"]
     wav = np.array(wav)
     embed = rtvc_main.inference(wav, sample_rate)
-    embed = jsonable_encoder(embed.tolist())
-    return JSONResponse(embed)
+    # embed = jsonable_encoder(embed.tolist())
+    embed = embed.tolist()
+    embed_json = json.dumps({
+        "embed": embed
+    })
+    return JSONResponse(embed_json)
 
 @app.get('/preprocess/')
 async def inference(userinput: EmbedInput):

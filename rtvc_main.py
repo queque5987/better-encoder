@@ -13,6 +13,7 @@ def inference(wav, sampling_rate):
     preprocessed_wav = encoder.preprocess_wav(wav, sampling_rate)
     embed = encoder.embed_utterance(preprocessed_wav)
     return embed
+    
 def preprocess(wav, sampling_rate):
     preprocessed_wav = encoder.preprocess_wav(wav, sampling_rate)
     return preprocessed_wav
