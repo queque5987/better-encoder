@@ -34,7 +34,7 @@ def index():
     return FileResponse('index.html')
     # return templates.TemplateResponse("index.html")
 
-@app.post('/inference/')
+@app.get('/inference/')
 async def inference(userinput: EmbedInput):
     """
     @request
@@ -51,12 +51,13 @@ async def inference(userinput: EmbedInput):
     wav = userinput["wav"]
     wav = np.array(wav)
     embed = rtvc_main.inference(wav, sample_rate)
-    # embed = jsonable_encoder(embed.tolist())
-    embed = embed.tolist()
-    embed_json = json.dumps({
-        "embed": embed
-    })
-    return JSONResponse(embed_json)
+    embed = jsonable_encoder(embed.tolist())
+    return JSONResponse(embed)
+    # embed = embed.tolist()
+    # embed_json = json.dumps({
+    #     "embed": embed
+    # })
+    # return JSONResponse(embed_json)
 
 @app.get('/preprocess/')
 async def inference(userinput: EmbedInput):
