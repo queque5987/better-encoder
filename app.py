@@ -59,15 +59,15 @@ async def inference(userinput: EmbedInput):
     })
     return JSONResponse(embed_json)
 
-@app.get('/preprocess/')
+@app.post('/preprocess/')
 async def inference(userinput: EmbedInput):
     """
     @request
-        user voice sample {list}
+        user generated voice {list}
             {array} wav, {int} sample_rate loaded by librosa
     @response
-        user voice embedding {list}
-            {ndarray} embedding converted into {list} so that it could be sent as a request;
+        user generated voice trimed {list}
+            wav {list} use librosa or other library to generate wav file with it.
 
     **This method preprocesses wav file - nomalizing, match the sampling rate**
     """
@@ -76,5 +76,9 @@ async def inference(userinput: EmbedInput):
     wav = userinput["wav"]
     wav = np.array(wav)
     wav = rtvc_main.preprocess(wav, sample_rate)
-    wav = jsonable_encoder(wav.tolist())
-    return JSONResponse(wav)
+    # wav = jsonable_encoder(wav.tolist())
+    wav = wav.tolist()
+    wav_json = json.dumps({
+        "wav": wav
+    })
+    return JSONResponse(wav_json)
