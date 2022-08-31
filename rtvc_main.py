@@ -1,15 +1,10 @@
 from pathlib import Path
 from encoder import inference as encoder
 
-class rtvc_args():
-    def __init__(self):
-        self.enc_model_fpath = Path("saved_models/encoder")
-        self.cpu = True
-        self.seed = None
-
 def inference(wav, sampling_rate):
-    args = rtvc_args()
-    encoder.load_model(args.enc_model_fpath)
+    if not encoder.is_loaded():
+        print("loading model . . . ")
+        encoder.load_model("/")
     preprocessed_wav = encoder.preprocess_wav(wav, sampling_rate)
     embed = encoder.embed_utterance(preprocessed_wav)
     return embed
