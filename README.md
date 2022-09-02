@@ -72,9 +72,6 @@ https://dashboard.heroku.com/
 -----
 Better-API (encoder)
 =============
-https://github.com/queque5987/better-synthesizer-w   
-https://github.com/queque5987/better-synthesizer   
-https://github.com/queque5987/better-vocoder    
 
 ### Better-API는 사용자의 목소리로 문장을 읽어주는 소리 파일을 만들어 냅니다.   
     1.인코더는 사용자의 목소리와 임베딩을 생성하여 신세사이저로 전달합니다.   
