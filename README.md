@@ -45,7 +45,6 @@ source : https://fastapi.tiangolo.com/
 ## Heroku
 For deployment, I used Heroku
 to install librosa I added build pack to Heroku : https://github.com/heroku/heroku-buildpack-apt   
-https://dashboard.heroku.com/
 
 ## requirements.txt
 ### For deployment
@@ -111,7 +110,6 @@ source : https://fastapi.tiangolo.com/
 ## Heroku
 배포를 위해 Heroku를 사용하였습니다.    
 librosa를 설치하기 위해서 Heroku에 해당 빌드팩을 추가하였습니다. (https://github.com/heroku/heroku-buildpack-apt)   
-https://dashboard.heroku.com/
 
 ## requirements.txt
 ### For deployment
