@@ -62,7 +62,7 @@ async def inference(userinput: EmbedInput):
     })
     return JSONResponse(embed_json)
 
-@app.post('/preprocess/')
+@app.post('/preprocess')
 async def inference(userinput: EmbedInput):
     """
     @request
