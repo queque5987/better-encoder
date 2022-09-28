@@ -37,7 +37,6 @@ def index():
 @app.get('/check')
 def check():
     return "service available"
-    # return templates.TemplateResponse("index.html")
 
 @app.post('/inference')
 async def inference(userinput: EmbedInput):
